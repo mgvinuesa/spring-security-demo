@@ -18,7 +18,18 @@ spring:
     properties:
       hibernate:
         format_sql: true 
+  cloud:
+     azure:
+        active-directory:
+           enabled: true
+           profile:
+              tenant-id: f39ffe18-4a95-483f-a730-990dbf97df1e
+           credential:
+              client-id: bf5daced-e00d-495c-bdc9-b6d499451624
+              client-secret: Ua28Q~pbBdm247WbNktFxg60odtI6lTpL1vhWbWk
+   
+ 
      
 logging:
   level:
-    root: INFO
+    root: DEBUG
