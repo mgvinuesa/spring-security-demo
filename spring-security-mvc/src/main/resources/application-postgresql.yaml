@@ -1,0 +1,18 @@
+spring:
+  jpa:
+     hibernate:
+        ddl-auto: update
+     properties:
+        hibernate:
+           dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    initialization-mode: always
+    driverClassName: org.postgresql.Driver
+    # This values are override in docker compose
+    url: jdbc:postgresql://localhost:5432/exampledb
+    username: postgresuser
+    password: postgrespw
+    continueOnError: true
+    
+logger:
+   org.hibernate.SQL: DEBUG
