@@ -21,8 +21,6 @@ Añade, sin más, lo siguiente:
 
 * Creates a UserDetailsService bean with a username of user and a randomly generated password that is logged to the console.
 
-* Registers the Filter with a bean named springSecurityFilterChain with the Servlet container for every request.
-
 * Require an authenticated user for any interaction with the application
 
 * Generate a default login form for you
@@ -69,10 +67,9 @@ Añade, sin más, lo siguiente:
 
 ## Revisar la clase
 
-org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer -> Registra el filtro a nivel de Servlet (onStartup->insertSpringSecurityFilterChain)
-org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration -> Registra el @Bean asociado al filter en el contexto
-org.springframework.boot.autoconfigure.security.servlet.SpringBootWebSecurityConfiguration -> Añade la configuración básica a nivel de SecurityFilterChain (nueva impl)
-org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration -> Crea un InMemoryUserDetailsManager para la gestión del primer usuario de prueba
+2. org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration -> Registra el @Bean asociado al filter en el contexto
+3. org.springframework.boot.autoconfigure.security.servlet.SpringBootWebSecurityConfiguration -> Añade la configuración básica a nivel de SecurityFilterChain (nueva impl)
+4. org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration -> Crea un InMemoryUserDetailsManager para la gestión del primer usuario de prueba
 
 
 * Ver los condicionales

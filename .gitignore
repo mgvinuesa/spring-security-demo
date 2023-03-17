@@ -27,3 +27,4 @@ spring-security-example-1/.project
 **/.settings/*
 **/target/*
 spring-security-mvc/.project
+**/.project
