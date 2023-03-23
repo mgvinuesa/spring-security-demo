@@ -1,0 +1,11 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Hello Security!</title>
+</head>
+<body>
+    <h1>Hello Security! (you are in the secured page)!</h1>
+     <form class="form-signin" th:action="@{/logout}" method="post">
+	 	<button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button><br/>
+     </form>
+</body>
+</html>
