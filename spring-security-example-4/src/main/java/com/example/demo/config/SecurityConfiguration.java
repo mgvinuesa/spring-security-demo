@@ -25,11 +25,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests((requests) -> requests
-                		 .antMatchers("/css/**", "/login", "/registration*","/user/registration*")
+                		 .antMatchers("/h2", "/login", "/registration*","/user/registration", "/successRegister*", "/regitrationConfirm", "/resources/**")
                          .permitAll()
                          .anyRequest()
                          .authenticated()
-                )
+                ).csrf(c -> c.disable())
                 .formLogin(login -> login
                 		.loginPage("/login") // Marcar la misma URL que por defecto no hace que se comporte igual
                         .loginProcessingUrl("/perform_login")) 

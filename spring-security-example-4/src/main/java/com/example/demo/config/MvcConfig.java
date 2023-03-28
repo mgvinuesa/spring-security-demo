@@ -35,9 +35,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(final ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("forward:/login");
 		registry.addViewController("/registration.html");
 		registry.addViewController("/index.html");
+		registry.addViewController("/successRegister.html");
+		registry.addViewController("/badUser.html");
+		registry.addViewController("/registration.html");
 	}
 
 	@Override
@@ -69,6 +71,12 @@ public class MvcConfig implements WebMvcConfigurer {
 		cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
 		return cookieLocaleResolver;
 	}
+
+//	@Bean
+//	public LocaleResolver localeResolver() {
+//	    SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+//	    return sessionLocaleResolver;
+//	}
 
 	@Override
 	public Validator getValidator() {

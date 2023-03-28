@@ -17,7 +17,7 @@ color:#000;
         <div >
             <h1 th:utext="#{label.form.title}">form</h1>
             <br/>
-            <form method="POST" enctype="utf8" >
+            <form th:action="@{/user/registration}" method="POST" enctype="utf8" >
                 <div class="form-group row" >
                     <label for="firstName" class="col-sm-3" th:utext="#{label.user.firstName}">first</label>
                     <span class="col-sm-5"><input id="firstName" class="form-control" name="firstName" value="" required="required"/></span>
@@ -46,10 +46,6 @@ color:#000;
                     <span class="col-sm-5"><input id="matchPassword" class="form-control" name="matchingPassword" value="" type="password" required="required" autocomplete="new-password"/></span>
                     <span id="globalError" class="alert alert-danger col-sm-4" style="display:none"></span>
                 </div>
-                <div class="form-group row">
-                    <label for="using2FA" class="col-sm-3" th:utext="#{label.user.2fa}">Use Two Step Verification</label>
-                    <span class="col-sm-5"><input id="using2FA" type="checkbox" name="using2FA" value="true"/></span>
-                </div>
                 <br/>
                 <button type="submit" class="btn btn-primary" th:utext="#{label.form.submit}">submit</button>
             </form>
@@ -62,9 +58,9 @@ color:#000;
 var serverContext = [[@{/}]];
 
 $(document).ready(function () {
-	$('form').submit(function(event) {
-		register(event);
-	});
+	//$('form').submit(function(event) {
+	//	register(event);
+	//});
 	
 	$(":password").keyup(function(){
 		if($("#password").val() != $("#matchPassword").val()){

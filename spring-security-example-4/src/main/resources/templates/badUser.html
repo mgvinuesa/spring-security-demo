@@ -1,0 +1,21 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <title th:utext="#{label.badUser.title}">bad user</title>
+</head>
+<body>
+<div class="container">
+<h1 class="alert alert-danger" th:utext="${message}">error</h1>
+<br/>
+<a class="btn btn-default" th:href="@{/registration.html}" th:utext="#{label.form.loginSignUp}">signup</a>
+
+<div th:if="${expired}">
+<br/>
+<h1 th:utext="#{label.form.resendRegistrationToken}">resend</h1>
+<button>resend</button>
+
+
+</div>
+</div>
+</body>
+</html>

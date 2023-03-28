@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.error.UserAlreadyExistException;
@@ -21,31 +22,38 @@ import com.example.demo.user.persistence.Role;
 import com.example.demo.user.persistence.RoleRepository;
 import com.example.demo.user.persistence.User;
 import com.example.demo.user.persistence.UserRepository;
+import com.example.demo.user.persistence.VerificationToken;
+import com.example.demo.user.persistence.VerificationTokenRepository;
 
 @Service
-public class CustomUserService implements UserDetailsService {
+public class CustomUserService implements UserDetailsService, UserService {
 
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
+	private VerificationTokenRepository verificationTokenRepository;
 
-	public CustomUserService(UserRepository userRepository, RoleRepository roleRepository) {
+	public CustomUserService(UserRepository userRepository, RoleRepository roleRepository,
+			VerificationTokenRepository verificationTokenRepository) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
+		this.verificationTokenRepository = verificationTokenRepository;
 	}
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException("No user found with email: " + email);
 		}
-		boolean enabled = true;
+		// boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword().toLowerCase(),
-				enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoles()));
+				user.isEnabled(), accountNonExpired, credentialsNonExpired, accountNonLocked,
+				getAuthorities(user.getRoles()));
 	}
 
 	private Collection<? extends GrantedAuthority> getAuthorities(final Collection<Role> roles) {
@@ -74,6 +82,8 @@ public class CustomUserService implements UserDetailsService {
 		return authorities;
 	}
 
+	@Override
+	@Transactional
 	public User registerNewUserAccount(@Valid UserDto userDto) {
 		if (emailExists(userDto.getEmail())) {
 			throw new UserAlreadyExistException("There is an account with that email address: " + userDto.getEmail());
@@ -91,6 +101,25 @@ public class CustomUserService implements UserDetailsService {
 
 	private boolean emailExists(String email) {
 		return userRepository.findByEmail(email) != null;
+	}
+
+	@Override
+	@Transactional
+	public void createVerificationTokenForUser(User user, String token) {
+		final VerificationToken myToken = new VerificationToken(token, user);
+		verificationTokenRepository.save(myToken);
+	}
+
+	@Override
+	@Transactional
+	public VerificationToken getVerificationToken(String token) {
+		return verificationTokenRepository.findByToken(token);
+	}
+
+	@Override
+	@Transactional
+	public void saveRegisteredUser(User user) {
+		userRepository.save(user);
 	}
 
 }

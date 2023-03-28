@@ -35,6 +35,14 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
+	@Column(name = "enabled")
+	private boolean enabled;
+
+	public User() {
+		super();
+		this.enabled = false;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -81,6 +89,14 @@ public class User {
 
 	public void setRoles(final Collection<Role> roles) {
 		this.roles = roles;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
 	}
 
 	@Override

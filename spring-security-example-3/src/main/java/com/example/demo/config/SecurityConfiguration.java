@@ -97,7 +97,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//TODO: Change to UserDetailsService type and explain why createUser is not in the interface
 		InMemoryUserDetailsManager userDetailsService = 
 		        new InMemoryUserDetailsManager();  
 		    var user = User.withUsername("Manuel")   
