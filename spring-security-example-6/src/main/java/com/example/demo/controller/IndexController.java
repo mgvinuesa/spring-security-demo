@@ -17,9 +17,18 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.service.SecuredService;
 
 @Controller
 public class IndexController {
+
+	private SecuredService securedService;
+
+	public IndexController(SecuredService securedService) {
+		this.securedService = securedService;
+	}
 
 	@GetMapping("/")
 	public String index() {
@@ -27,7 +36,10 @@ public class IndexController {
 	}
 
 	@GetMapping("/secured")
-	public String secured() {
+	public String secured(@RequestParam(name = "method", required = false) boolean method) {
+		if (method) {
+			this.securedService.invoke();
+		}
 		return "secured";
 	}
 
