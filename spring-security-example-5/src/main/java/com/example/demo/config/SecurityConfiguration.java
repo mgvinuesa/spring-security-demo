@@ -29,8 +29,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                                  .access("hasAuthority('WRITE') and !hasAuthority('DELETE')")
 //                                .antMatchers("/secured")
 //                                  .hasRole("ADMIN")
-//                                  .antMatchers("/secured")
-//                                  	.access("T(java.time.LocalTime).now().isAfter(T(java.time.LocalTime).of(12, 0))")
+//                                .antMatchers("/secured")
+//                                  .access("T(java.time.LocalTime).now().isAfter(T(java.time.LocalTime).of(12, 0))")
+//                                .mvcMatchers(HttpMethod.GET, "/secured")
+//                                    .hasRole("ADMIN")
+// There are only examples
+//                                .mvcMatchers(HttpMethod.GET, "products/{code:^[0-9]*$}")
+//                                  .hasRole("ADMIN")
+//                                .mvcMatchers("/email/{email:.*(.+@.+\\.com)}")
+//                                   .permitAll()
                                 .anyRequest()
                                 	.authenticated()
                                 
