@@ -1,9 +1,24 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Hello Security!</title>
+   
 </head>
 <body>
     <h1>Hello Security! (you are in the secured page)!</h1>
+    <div>
+    Logged user: <span sec:authentication="name"></span>
+	Roles: <span sec:authentication="principal.authorities"></span>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+		This content is only shown to authenticated users.
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+ 		 This content is only shown to administrators.
+	</div>
+	<div sec:authorize="hasRole('ROLE_STAFF')">
+  		This content is only shown to staff.
+	</div>
+    
      <form class="form-signin" th:action="@{/logout}" method="post">
 	 	<button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button><br/>
      </form>
