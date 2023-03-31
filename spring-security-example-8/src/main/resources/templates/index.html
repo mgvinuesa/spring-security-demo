@@ -1,0 +1,26 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Hello Security!</title>
+</head>
+<body>
+    <h1>Hello Security (This is the index page)</h1>
+    <table>
+    <thead>
+        <tr>
+            <th> Name </th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${items.empty}">
+            <td colspan="2"> No Items Available </td>
+        </tr>
+        <tr th:each="item : ${items}">
+            <td><span th:text="${item.name}"> name </span></td>
+        </tr>
+    </tbody>
+</table>
+     <form class="form-signin" th:action="@{/logout}" method="post">
+	 	<button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button><br/>
+     </form>
+</body>
+</html>
