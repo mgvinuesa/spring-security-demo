@@ -22,7 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.cart.CartStore;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class IndexController {
 
 	@Autowired
@@ -30,6 +33,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public ModelAndView index() {
+		log.info("Hello");
 		return new ModelAndView("index", "items", store.getItems());
 	}
 
