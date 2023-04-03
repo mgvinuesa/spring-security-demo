@@ -28,8 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 		
                 		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 		.maximumSessions(2))
-                	// SessionCreationPolicy.STATELESS
-                	// This stateless architecture plays well with REST APIs and their Statelessness constraint. They also work well with authentication mechanisms such as Basic and Digest Authentication.
                 .authorizeRequests((requests) -> requests
                                 .antMatchers("/login")
                                 .permitAll()
@@ -39,12 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin(withDefaults())
                 .logout(withDefaults());    
 	}
-	  
-//	@Bean
-//	public HttpSessionEventPublisher httpSessionEventPublisher() {
-//	    return new HttpSessionEventPublisher();
-//	}
-	
+
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
