@@ -5,7 +5,7 @@ COPY pom.xml /usr/src/app
 
 RUN mvn -f /usr/src/app/pom.xml clean package
 
-FROM openjdk:11.0.16-jdk
+FROM openjdk:17.0.2-jdk
 
 COPY --from=builder /usr/src/app/target/spring-security-example-9-0.0.1-SNAPSHOT.jar /app.jar
 
