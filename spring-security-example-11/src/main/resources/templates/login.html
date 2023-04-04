@@ -14,7 +14,7 @@
       <form class="form-signin" th:action="@{/login}" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <p>Example: user  / password</p>
-        <p th:if="${param.error}" class="error">Invalid user or password</p>
+        <div th:if="${param.error}" class="alert alert-danger" th:utext="${session[SPRING_SECURITY_LAST_EXCEPTION]}">error</div>
         <p>
           <label for="username" class="sr-only">Username</label>
           <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus/>
