@@ -3,5 +3,6 @@ server:
       session:
          timeout: 15m
          cookie:
+            # session-fixation
             http-only: true # if true then browser script won't be able to access the cookie
             secure: false # if true then the cookie will be sent only over HTTPS connection

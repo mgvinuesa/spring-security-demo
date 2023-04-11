@@ -1,0 +1,11 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Hello Security!</title>
+</head>
+<body>
+    <h1>Hello Security!</h1>
+    <div th:text="${session.id}">SessionID</div> 
+    <div th:text="${session.value}">John Doe</div>
+    <a id="logout" th:href="@{/logout}">Log Out</a>
+</body>
+</html>
