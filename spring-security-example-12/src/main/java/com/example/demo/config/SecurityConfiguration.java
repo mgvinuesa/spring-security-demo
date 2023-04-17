@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.csrf.LazyCsrfTokenRepository;
 
 @Configuration
@@ -24,7 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 )
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults())
-                .csrf(csrf -> csrf.csrfTokenRepository(new LazyCsrfTokenRepository(new CookieCsrfTokenRepository())))
+                .csrf(csrf -> 
+                	//csrf.csrfTokenRepository(new LazyCsrfTokenRepository(new CookieCsrfTokenRepository())))
+                	csrf.csrfTokenRepository(new LazyCsrfTokenRepository(new HttpSessionCsrfTokenRepository())))
                 .headers(headers -> headers.disable())
                 .sessionManagement(management -> 
                 	 //management.sessionFixation().none());
