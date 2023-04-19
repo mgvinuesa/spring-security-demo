@@ -1,4 +1,8 @@
-# Autentication Handlers
+In the example number three we are going to explore how to include additional behavior in the login and logout process.
 
-* https://www.baeldung.com/spring-security-custom-authentication-failure-handler
-* https://www.codejava.net/frameworks/spring-boot/spring-security-authentication-success-handler-examples
+
+* Check the new code included in the class SecurityConfiguration
+* Check the login and logout definition. Execute a failed login or a logout and check what is happening.
+* Change the current failure handler to the new one an repeat the login operation.
+* Run the spring boot application in both cases.
+
