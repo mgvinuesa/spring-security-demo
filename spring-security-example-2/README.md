@@ -1,45 +1,10 @@
-# Obtención del usuario
+In the example number two we are going to modify and evaluate how to override the default configurations
 
-En la clase SecurityConfiguration se ha definido los sistemas de autenticación siguientes
+* Check the new code included in the class SecurityConfiguration
+* Review the parent class, why is it deprecated ?
+  * Check the class CustomAuthenticationProvider,  dis-comment the @Bean and test again.
+  * Check the different 'configure' methods.
+  * Check the commented @Bean.  Explore the class WebSecurityConfigurerAdapter and the method setApplicationContext and the LazyPasswordEncoder.
 
-* Form
-* Basic
+* Run the spring boot application.
 
-```
-protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests((requests) -> requests
-				.anyRequest().authenticated()
-			)
-			.httpBasic(withDefaults())
-			.formLogin(withDefaults());
-	}
-```
-
-
-Quitar una de las opciones y volver a probar. Ejemplo de Auth Basic
-
-```
-curl --location 'http://localhost:8080/' \
---header 'Authorization: Basic dXNlcjo5ZDhhODQxYy01ZGJmLTQ0MTktYTM3OC1mZTc2MGRmMTk1Yzk=' \
---header 'Cookie: JSESSIONID=2F9A715926D2C8C051EBA43B36F19C9D'
-```
-
-# Revisar las dos maneras de añadir customizaciones
-
-1. Añadir @Beans al contexto.
-2. Modificar a través del @Override de WebSecurityConfigurerAdapter
-
-# Customización de la gestión de usuarios.
-
-https://docs.spring.io/spring-security/reference/5.7/servlet/authentication/passwords/storage.html
-
-Soporta varios tipos de almacenamiento:
-
-* Memoria
-
-* JDBC: -> org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl
-
-Uso de una BD externa para la gestión de usuarios.
-
-# Customización de métodos de autenticación, CustomAuthenticationProvider
