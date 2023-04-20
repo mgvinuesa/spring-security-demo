@@ -23,6 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.httpBasic(withDefaults())
 			.formLogin(withDefaults());
 	}
+	
+	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		    userDetailsService.createUser(user);        
 
-		    auth.userDetailsService(userDetailsService) 
-		        .passwordEncoder(NoOpPasswordEncoder.getInstance());;
+		    auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+		    //auth.authenticationProvider(new CustomAuthenticationProvider());
 	}
 	
 
